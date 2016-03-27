@@ -67,6 +67,14 @@ else
 	$logo = $this->baseurl . '/templates/' . $this->template . '/images/logo.png';
 }
 
+// Load custom.css
+$customCss = 'templates/' . $this->template . '/css/custom.css';
+
+if (file_exists($customCss) && filesize($customCss) > 0)
+{
+	$doc->addStyleSheetVersion($customCss);
+}
+
 // Template Parameters
 $displayHeader = $this->params->get('displayHeader', '1');
 $statusFixed   = $this->params->get('statusFixed', '1');
@@ -169,8 +177,9 @@ $stickyToolbar = $this->params->get('stickyToolbar', '1');
 						</ul>
 					</li>
 				</ul>
+				<!--
 				<a class="brand visible-desktop visible-tablet" href="<?php echo JUri::root(); ?>" title="<?php echo JText::sprintf('TPL_ISIS_PREVIEW', $sitename); ?>" target="_blank"><?php echo JHtml::_('string.truncate', $sitename, 14, false, false); ?>
-					<span class="icon-out-2 small"></span></a>
+					<span class="icon-out-2 small"></span></a>-->
 			</div>
 			<!--/.nav-collapse -->
 		</div>
@@ -288,7 +297,7 @@ $stickyToolbar = $this->params->get('stickyToolbar', '1');
 			{
 				if ($('.subhead').length) {
 					navTop = $('.subhead').length && $('.subhead').offset().top - <?php echo ($displayHeader || !$statusFixed) ? 30 : 20;?>;
-	
+
 					// Only apply the scrollspy when the toolbar is not collapsed
 					if (document.body.clientWidth > 480)
 					{
